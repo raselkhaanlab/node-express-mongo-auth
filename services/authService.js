@@ -36,8 +36,9 @@ const fetchUserFromEmailAndPassword = async (email, password) => {
       _id: userId,
     }).lean();
   
-    if (!user)
+    if (!user) {
       throw new APIError(httpStatus.FORBIDDEN, 'Invalid Refresh Token - logout');
+    }
     return user;
   };
   
@@ -47,8 +48,9 @@ const fetchUserFromEmailAndPassword = async (email, password) => {
     })
       .lean();
   
-    if (!user)
+    if (!user) {
       throw new APIError(httpStatus.UNAUTHORIZED, 'invalid access token user');
+    }
   
     return user;
   };
@@ -62,8 +64,9 @@ const fetchUserFromEmailAndPassword = async (email, password) => {
   
     let passwordMatches = await bcrypt.compare(password, user.password);
   
-    if (!passwordMatches)
+    if (!passwordMatches) {
       throw new APIError(httpStatus.BAD_REQUEST, 'invalid current password');
+    }
   };
   
   const updatePassword = async (userId, newPassword) => {

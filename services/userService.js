@@ -7,8 +7,9 @@ import { isValidObjectId } from '../utils/mongo.js';
 
 const getUserFromId = async(userId) =>{
     const user = await UserModel.findById(userId).lean();
-    if(!user)
-        throw new ApiError("Invaid User Id")
+    if(!user) {
+      throw new ApiError("Invaid User Id")
+    }
     return user;
 }
 // Function to get paginated items
@@ -93,11 +94,13 @@ const isUserExists = async (userId) => await UserModel.exists({
 
   const createNewUser = async(user)=>{
     const oldUser =await UserModel.findOne({ email:user.email.toLowerCase() });
-    if(oldUser)
-      throw new APIError(httpStatus.BAD_REQUEST,"Email already exists.")
+    if(oldUser) {
+      throw new ApiError(400, 'Email already exists');
+    }
     const newUser = await UserModel.create(user);
-    if(!newUser)
+    if(!newUser) {
       throw new APIError(httpStatus.BAD_REQUEST,"Oops...seems our server needed a break!")
+    }
     return newUser;
   }
  
@@ -107,8 +110,9 @@ const isUserExists = async (userId) => await UserModel.exists({
     })
     .lean();
   
-    if (!user)
+    if (!user) {
       throw new APIError(httpStatus.BAD_REQUEST, 'please sign up - this email does not exist');
+    }
   
     return user;
   };

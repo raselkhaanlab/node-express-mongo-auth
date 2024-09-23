@@ -12,7 +12,9 @@ const handler = (err, req, res, next) => {
     type: err.type,
     uuid: err.uuid,
   };
-  if (!response.uuid) delete response.uuid;
+  if (!response.uuid) {
+    delete response.uuid;
+  }
 
   res.status(response.statusCode).json(response);
 };

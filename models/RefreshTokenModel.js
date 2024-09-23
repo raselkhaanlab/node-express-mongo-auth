@@ -1,6 +1,4 @@
 import mongoose from 'mongoose';
-import bcrypt from 'bcryptjs';
-
 const refreshTokenSchema = new mongoose.Schema({
   userRef: {
     type: String,

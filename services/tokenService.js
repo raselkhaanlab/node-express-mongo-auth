@@ -44,7 +44,9 @@ const saveRefreshToken = async (userId, loginTime, token) => {
 
 const clearRefreshToken = async (token) => {
   const res =  await RefreshTokenModel.findOneAndDelete({ token: token });
-  if(!res)throw new APIError(httpStatus.BAD_REQUEST, 'Invalid Refresh Token');
+  if(!res) {
+    throw new APIError(httpStatus.BAD_REQUEST, 'Invalid Refresh Token');
+  }
 };
 const generateAuthTokens = async (user) => {
   const loginTime = moment(user.lastLogin);
@@ -103,12 +105,14 @@ const generateAccessTokenFromRefreshTokenPayload = async ({
 
 const verifyRefreshToken = async (token) => {
   let tokenPayload = await verify(token, env("JWT_SECRET"));
-  if (!tokenPayload || tokenPayload.type !== tokenTypes.REFRESH)
+  if (!tokenPayload || tokenPayload.type !== tokenTypes.REFRESH) {
     throw new APIError(httpStatus.FORBIDDEN, 'Invalid Refresh Token - logout');
+  }
 
   let refreshTokenExists = await RefreshTokenModel.exists({ token: token });
-  if (!refreshTokenExists)
+  if (!refreshTokenExists) {
     throw new APIError(httpStatus.FORBIDDEN, 'Invalid Refresh Token - logout');
+  }
 
   return tokenPayload;
 };
