@@ -23,9 +23,9 @@ const app= express();
 if (env("NODE_ENV") !== 'production') {
   app.use(morgan('dev'));
 }
-app.use('/api-docs', express.static(path.join(__dirname, 'node_modules/swagger-ui-dist')));
+// app.use('/api-docs', express.static(path.join(__dirname, 'node_modules/swagger-ui-dist')));
 // Swagger UI setup
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+app.use('/api-docs', express.static(path.join(__dirname, 'node_modules/swagger-ui-dist')), swaggerUi.setup(swaggerSpec));
 app.use(helmet());
 
 // parse json request body
