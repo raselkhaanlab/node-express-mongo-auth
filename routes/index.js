@@ -10,6 +10,7 @@ router.get('/status', (req, res) => {
       status: 'ok',
       processEnv: env("NODE_ENV") || 'not set',
       CURRENT_PROJECT: env("CURRENT_PROJECT"),
+      nodeVersion: process?.versions?.node
     });
 });
 
