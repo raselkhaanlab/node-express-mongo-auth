@@ -2,8 +2,7 @@ import httpStatus from 'http-status';
 import yup, { ValidationError } from 'yup';
 import { v4 as uuidv4 } from 'uuid';
 import logger from '../config/logger.js';
-
-import APIError from '../utils/APIError.js';
+import APIError from "../utils/apiErrorClass.js";
 
 const handler = (err, req, res, next) => {
   const response = {

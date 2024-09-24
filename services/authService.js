@@ -1,7 +1,7 @@
 
   import { UserModel } from '../models/index.js';
   import bcrypt from 'bcryptjs';
-import ApiError from '../utils/APIError.js';
+import ApiError from '../utils/apiErrorClass.js';
 import httpStatus from 'http-status';
 import { UNBLOCKED } from '../config/user.js';
   

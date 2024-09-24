@@ -1,7 +1,7 @@
 
 import { userStatus } from '../config/user.js';
 import {UserModel} from '../models/index.js'
-import ApiError from '../utils/APIError.js';
+import ApiError from '../utils/apiErrorClass.js';
 import httpStatus from 'http-status';
 import { isValidObjectId } from '../utils/mongo.js';
 

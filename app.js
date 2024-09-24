@@ -15,10 +15,9 @@ const app= express();
 // app.get('/favicon.ico', (req, res) => res.status(204));
 if (env("NODE_ENV") !== 'production') {
   app.use(morgan('dev'));
-  // Swagger UI setup
-  app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 }
-
+// Swagger UI setup
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.use(helmet());
 
 // parse json request body

@@ -1,4 +1,4 @@
-import APIError from '../utils/APIError.js';
+import APIError from '../utils/apiErrorClass.js';
 import httpStatus from 'http-status';
 import { tokenTypes } from '../config/tokens.js';
 import { verify } from '../utils/jwtHelpers.js';

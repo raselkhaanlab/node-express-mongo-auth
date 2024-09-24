@@ -5,13 +5,19 @@ import { env } from '../config/env.js';
 
 const router = express.Router();
 
-router.get('/status', (req, res) => {
-  res.json({
-      status: 'ok',
-      processEnv: env("NODE_ENV") || 'not set',
-      CURRENT_PROJECT: env("CURRENT_PROJECT"),
-      nodeVersion: process?.versions?.node
-    });
+router.get('/status', (req, res, next) => {
+  try {
+    throw new Error("error")
+  } catch(error) {
+    next(error);
+  }
+
+  // res.json({
+  //     status: 'ok',
+  //     processEnv: env("NODE_ENV") || 'not set',
+  //     CURRENT_PROJECT: env("CURRENT_PROJECT"),
+  //     nodeVersion: process?.versions?.node
+  //   });
 });
 
 
