@@ -9,6 +9,13 @@ import bodyParser from 'body-parser';
 import routes from './routes/index.js';
 import error from './middlewares/error.js';
 import { swaggerSpec, swaggerUi } from './config/swagger.js';
+import path from 'path';
+
+import { fileURLToPath } from 'url';
+// Get the file path of the current module
+const __filename = fileURLToPath(import.meta.url);
+// Get the directory name of the current module
+const __dirname = path.dirname(__filename);
 
 const app= express();
 
@@ -16,6 +23,7 @@ const app= express();
 if (env("NODE_ENV") !== 'production') {
   app.use(morgan('dev'));
 }
+app.use('/api-docs', express.static(path.join(__dirname, 'node_modules/swagger-ui-dist')));
 // Swagger UI setup
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.use(helmet());
