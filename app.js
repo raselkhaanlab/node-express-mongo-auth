@@ -23,9 +23,18 @@ const app= express();
 if (env("NODE_ENV") !== 'production') {
   app.use(morgan('dev'));
 }
-// app.use('/api-docs', express.static(path.join(__dirname, 'node_modules/swagger-ui-dist')));
+
 // Swagger UI setup
-app.use('/api-docs', express.static(path.join(__dirname, 'node_modules/swagger-ui-dist')), swaggerUi.setup(swaggerSpec));
+app.use('/api-docs/swagger-ui.css', express.static(path.join(__dirname, 'node_modules/swagger-ui-dist/swagger-ui.css')));
+app.use('/api-docs/index.css', express.static(path.join(__dirname, 'node_modules/swagger-ui-dist/index.css')));
+app.use('/api-docs/swagger-ui-bundle.js', express.static(path.join(__dirname, 'node_modules/swagger-ui-dist/swagger-ui-bundle.js')));
+app.use('/api-docs/swagger-ui-standalone-preset.js', express.static(path.join(__dirname, 'node_modules/swagger-ui-dist/swagger-ui-standalone-preset.js')));
+app.use('/api-docs/swagger-ui-standalone-preset.js', express.static(path.join(__dirname, 'node_modules/swagger-ui-dist/swagger-ui-standalone-preset.js')));
+app.use('/api-docs/favicon-32x32.png', express.static(path.join(__dirname, 'node_modules/swagger-ui-dist/favicon-32x32.png')));
+app.use('/api-docs/favicon-16x16.png', express.static(path.join(__dirname, 'node_modules/swagger-ui-dist/favicon-16x16.png')));
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+
+// Setup http security headers
 app.use(helmet());
 
 // parse json request body
