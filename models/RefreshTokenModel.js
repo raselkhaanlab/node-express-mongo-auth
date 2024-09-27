@@ -1,8 +1,8 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 const refreshTokenSchema = new mongoose.Schema({
   userRef: {
     type: String,
-    ref: 'users',                      //The $ref field holds the name of the collection where the referenced document resides.
+    ref: "users",
     required: true,
     index: true,
   },
@@ -17,6 +17,6 @@ const refreshTokenSchema = new mongoose.Schema({
   },
 });
 
-const RefreshToken = mongoose.model('RefreshToken', refreshTokenSchema);
+const RefreshToken = mongoose.model("RefreshToken", refreshTokenSchema);
 
 export default RefreshToken;
